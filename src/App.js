@@ -1,26 +1,27 @@
 import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import Form from './components/Form';
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
-}
+import NewsContextProvider from './context/NewsContext';
+import { fetchData } from './helpers/fetchData';
+import Header from './components/Header';
+import NewsList from './components/NewsList';
+
+const App = () => {
+    fetchData('general');
+
+    return (
+        <NewsContextProvider>
+            <Header title="News Finder" />
+
+            <div className="container">
+                <Form />
+
+                <hr />
+
+                <NewsList />
+            </div>
+        </NewsContextProvider>
+    );
+};
 
 export default App;
